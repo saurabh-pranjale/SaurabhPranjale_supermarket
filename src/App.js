@@ -12,7 +12,7 @@ function App() {
   return (
     <>
     <div>
-        <div className="bg-black">
+        <div className="bg-black sticky top-0 w-full  z-10">
           <Navbar/>
         </div>
         <Routes>

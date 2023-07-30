@@ -50,13 +50,15 @@ const API_URL = "https://fakestoreapi.com/products";
     {
       loading ? <div className='w-full h-[28rem] grid grid-cols-1 place-items-center'><BounceLoader   color={'#1B1464'}
       loading={loading}
-      size={130}/> </div>  :
+      size={110}/> </div>  :
       posts.length > 0 ? 
       
-      (<> <div className="grid  xs:gridcols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl p-2 mx-auto space-y-10 space-x-5 min-h-[80vh]">
+      (<> <div className="flex flex-row flex-wrap justify-center max-w-6xl p-2 mx-auto space-y-10 space-x-5  min-h-[80vh]">
         {
           posts.map( (post) => (
+           
           <Product key = {post.id} post={post}/>
+         
         ) )
         }
       </div></>) :
