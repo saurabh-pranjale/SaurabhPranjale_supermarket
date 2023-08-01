@@ -3,12 +3,15 @@ import { useState, useEffect } from "react";
 import BounceLoader from 'react-spinners/BounceLoader'
 import Product from '../Components/Product';
 import { Link } from 'react-router-dom';
+import {FiSearch} from 'react-icons/fi'
 
 const Home = () => {
 
 const API_URL = "https://fakestoreapi.com/products";
   const [loading, setLoading] = useState(false);
+  const [searchWord,setSearchWord] = useState("");
   const [posts, setPosts] = useState([]);
+  
 
   async function fetchProductData() {
     setLoading(true);
@@ -39,6 +42,13 @@ const API_URL = "https://fakestoreapi.com/products";
     
   }
 
+  const filterCoins = posts.filter((items)=>{
+
+    return items.category.toLowerCase().includes(searchWord.toLowerCase())
+    
+})
+
+
 
 
   useEffect( () => {
@@ -47,15 +57,19 @@ const API_URL = "https://fakestoreapi.com/products";
 
   return (
     <div>
+      <div className='fixed hidden sm:hidden  md:left-[18rem] top-6 md:top-5 z-20 md:flex flex-row items-center xs:hidden '><input type='text' placeholder='Search for more .....' className='border-2 border-black w-[14rem] md:w-[38rem] md:h-10 h-8 rounded-full text-center border-none ring-2 ' onChange={(e)=>{setSearchWord(e.target.value)}} /><FiSearch color='black' className='absolute right-4 cursor-pointer' size={25} /></div>
     {
       loading ? <div className='w-full h-[28rem] grid grid-cols-1 place-items-center'><BounceLoader   color={'#1B1464'}
       loading={loading}
       size={110}/> </div>  :
       posts.length > 0 ? 
       
-      (<> <div className="flex flex-row flex-wrap justify-center max-w-6xl p-2 mx-auto space-y-10 space-x-5  min-h-[80vh]">
+      (<> 
+      
+      <h1 className='font-extrabold text-2xl text-center mt-9'>BEST OF SP EXCLUSIVE BRANDS</h1>
+       <div className="flex flex-row flex-wrap justify-center max-w-6xl p-2 mx-auto space-y-10 space-x-5  min-h-[80vh]">
         {
-          posts.map( (post) => (
+          filterCoins.map( (post) => (
            
           <Product key = {post.id} post={post}/>
          
